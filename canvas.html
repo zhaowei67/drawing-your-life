@@ -4,26 +4,101 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <script src="//at.alicdn.com/t/font_1064486_0q55xhbfq52.js"></script>
+    <title>Canvas</title>
     <style>
-        body{
+        *{
             margin:0;
+            padding:0;
+        }
+        ul,li {
+            list-style: none;
+        }
+        .icon {
+            width: 1em; height: 1em;
+            vertical-align: -0.15em;
+            fill: currentColor;
+            overflow: hidden;
+        }
+        body{
+            overflow: hidden;
             /* position: relative; */
         }
         canvas{
             background-color:brown;
             display:block;
+            position:fixed;
+            top:0;
+            left:0;
         }
         .actions{
             position:fixed;
-            bottom:0;
-            left:0;
+            top:10px;
+            left:10px;
         }
-        .actions button{
-            width:80px;
-            line-height:30px;
+        .actions svg{
+            width:2em;
+            height:2em;
+            /* margin-left:10px; */
+            padding:5px;
+            /* 让icon慢慢缩小，直接去掉active会突然缩小 */
+            transition:all 0.3s;
         }
-        .actions #brush{
+        .actions svg.active{
+            fill: white;
+            transform: scale(1.3);
+            transition: all 0.3s;
+        }
+        #color{
+            position: fixed;
+            /* border:1px solid white; */
+            top:60px;
+            left:11px;
+        }
+        #color>li{
+            width:30px;
+            height:30px;
+            border:1px solid #ccc;
+            border-radius:50%;
+            margin-top:10px;
+            transition:all 0.3s;
+        }
+        #color li.active{
+            transform: scale(1.2)
+        }
+        #color #black{
+            background-color:black;
+        }
+        #color #red{
+            background-color:red;
+        }
+        #color #green{
+            background-color:green;
+        }
+        #color #blue{
+            background-color:blue;
+        }
+        .lineWidth{
+            position: fixed;
+            right:10px;
+            top:60px;
+        }
+        .lineWidth li{
+            margin-top:10px;
+        }
+        .lineWidth .thin{
+            width:40px;
+            height:10px;
+            border-top:5px solid;
+        }
+        .lineWidth .thick{
+            width:40px;
+            height:10px;
+            border-top:10px solid;
+        }
+
+
+        /* .actions #brush{
             display: none;
         }
         .actions.change #brush{
@@ -31,16 +106,36 @@
         }
         .actions.change #eraser{
             display: none;
-        }
+        } */
+
     </style>
 </head>
 <body>
     <canvas width=300 height=300></canvas>
     <div id="actions" class="actions">
-        <button id="eraser">橡皮擦</button>
-        <button id="brush">画笔</button>
+        <svg id="pen" class="icon active">
+                <use xlink:href="#icon-pen"></use>
+        </svg>
+        <svg id=eraser class="icon" >
+                <use xlink:href="#icon-eraser"></use>
+        </svg>
+        <svg id=trash class="icon" >
+                <use xlink:href="#icon-Trash"></use>
+        </svg>
+        <svg id="download" class="icon" >
+                <use xlink:href="#icon-download"></use>
+        </svg>
     </div>
-
+    <ul id="color">
+        <li id="black" class="active"></li>
+        <li id="red"></li>
+        <li id="green"></li>
+        <li id="blue"></li>
+    </ul>
+    <ul id="lineWidth" class="lineWidth">
+        <li id="thin" class="thin"></li>
+        <li id="thick" class="thick"></li>
+    </ul>
     <script src="canvas.js"></script>
 </body>
 </html>
